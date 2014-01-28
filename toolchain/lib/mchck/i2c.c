@@ -32,8 +32,9 @@ i2c_start_transaction(void)
 static void
 i2c_end_transaction()
 {
-	// send STOP condition if requested or nothing left to send, otherwise repeat START condition
-	if (ctx.cur->next == NULL || ctx.cur->stop == I2C_STOP)
+	// send STOP condition if no transactions left, otherwise repeat START condition
+	// caveat: some devices might not like the repeated start, though AFAICT the spec says Sr is equivalent to P + S
+	if (ctx.cur->next == NULL)
 		I2C0.c1.mst = 0;
 	else
 		I2C0.c1.rsta = 1;

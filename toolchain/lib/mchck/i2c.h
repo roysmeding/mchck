@@ -1,8 +1,3 @@
-enum i2c_stop {
-	I2C_NOSTOP,
-	I2C_STOP,
-};
-
 enum i2c_direction {
 	I2C_READ,
 	I2C_WRITE,
@@ -35,9 +30,6 @@ struct i2c_transaction {
 	// destination address and whether read or write 
 	uint8_t address;
 	enum i2c_direction direction;
-
-	// whether to end with stop condition
-	enum i2c_stop stop;
 
 	// data buffer and length
 	uint8_t *buffer;
